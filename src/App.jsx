@@ -1,22 +1,17 @@
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-// ...
-function App() {
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+
+export default function App() {
   return (
-    <Router>
+    <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<h1 className="p-6">Welcome to FitPulse</h1>} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-    </Router>
+    </>
   );
 }
