@@ -1,16 +1,16 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
-        primary: "#10B981", // emerald
-        secondary: "#3B82F6", // sky blue
-        accent: "#F59E0B", // amber
-        dark: "#374151", // cool gray
-        light: "#F9FAFB", // white background
+        primary: "#10B981", // emerald green
+        dark: "#1F2937", // gray-800
       },
     },
   },
   plugins: [],
-}
+};
