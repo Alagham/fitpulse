@@ -1,18 +1,18 @@
-// Import the functions you need
+// src/services/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-// Replace with your Firebase project config
 const firebaseConfig = {
-  apiKey: "AIzaSyCu3OrKeT1IWc-Yu0lQTXt2rGwI7cWR_SE",
-  authDomain: "fitpulse-94565.firebaseapp.com",
-  projectId: "fitpulse-94565",
-  storageBucket: "fitpulse-94565.firebasestorage.app",
-  messagingSenderId: "213710149995",
-  appId: "1:213710149995:web:686f4ff038921bb4d8d42e",
-  measurementId: "G-6HQ7J5C8CP"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();

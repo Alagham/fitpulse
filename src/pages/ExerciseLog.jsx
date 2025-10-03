@@ -1,52 +1,67 @@
 import { useState } from "react";
-
+import React from "react";
 export default function ExerciseLog() {
-  const [exercise, setExercise] = useState("");
-  const [duration, setDuration] = useState("");
-  const [date, setDate] = useState("");
+  const [exercises, setExercises] = useState([]);
+  const [form, setForm] = useState({ type: "", duration: "", calories: "" });
 
-  const handleSubmit = (e) => {
+  const addExercise = (e) => {
     e.preventDefault();
-    console.log({ exercise, duration, date });
-    setExercise("");
-    setDuration("");
-    setDate("");
+    if (!form.type || !form.duration || !form.calories) return;
+    setExercises([...exercises, form]);
+    setForm({ type: "", duration: "", calories: "" });
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold text-primary mb-4">Log Exercise</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="p-6">
+      <h1 className="text-3xl font-bold text-emerald-600 mb-6">
+        Exercise Log
+      </h1>
+
+      <form onSubmit={addExercise} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <input
           type="text"
-          placeholder="Exercise name"
-          value={exercise}
-          onChange={(e) => setExercise(e.target.value)}
-          className="w-full border px-4 py-2 rounded-lg"
-          required
+          placeholder="Exercise Type"
+          className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500"
+          value={form.type}
+          onChange={(e) => setForm({ ...form, type: e.target.value })}
         />
         <input
           type="number"
-          placeholder="Duration (minutes)"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-          className="w-full border px-4 py-2 rounded-lg"
-          required
+          placeholder="Duration (mins)"
+          className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500"
+          value={form.duration}
+          onChange={(e) => setForm({ ...form, duration: e.target.value })}
         />
         <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="w-full border px-4 py-2 rounded-lg"
-          required
+          type="number"
+          placeholder="Calories Burned"
+          className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500"
+          value={form.calories}
+          onChange={(e) => setForm({ ...form, calories: e.target.value })}
         />
         <button
           type="submit"
-          className="bg-primary text-white w-full py-2 rounded-lg hover:bg-emerald-600 transition"
+          className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
         >
-          Save
+          Add
         </button>
       </form>
+
+      <div className="grid gap-4">
+        {exercises.map((ex, idx) => (
+          <div
+            key={idx}
+            className="bg-white shadow-md rounded-lg p-4 flex justify-between items-center"
+          >
+            <div>
+              <p className="font-bold text-lg">{ex.type}</p>
+              <p className="text-gray-600">
+                {ex.duration} mins • {ex.calories} kcal
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

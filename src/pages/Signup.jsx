@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FcGoogle } from "react-icons/fc"; // install: npm i react-icons
 
-export default function Login() {
+export default function Signup() {
   const { user, loginWithGoogle, loginWithEmail } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,36 +14,36 @@ export default function Login() {
     if (user) navigate("/dashboard");
   }, [user, navigate]);
 
-  // ✅ Email/Password login
-  const handleEmailLogin = async (e) => {
+  // ✅ Email/Password signup
+  const handleEmailSignup = async (e) => {
     e.preventDefault();
     try {
       await loginWithEmail(email, password);
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login failed:", err.message);
+      console.error("Signup failed:", err.message);
     }
   };
 
-  // ✅ Google login
-  const handleGoogleLogin = async () => {
+  // ✅ Google signup
+  const handleGoogleSignup = async () => {
     try {
       await loginWithGoogle();
       navigate("/dashboard");
     } catch (err) {
-      console.error("Google login failed:", err.message);
+      console.error("Google signup failed:", err.message);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-200 via-yellow-200 to-pink-300">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 via-yellow-200 to-green-200">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-emerald-600 mb-6">
-          Welcome Back to FitPulse
+          Create Your FitPulse Account
         </h2>
 
-        {/* Email/Password Login */}
-        <form onSubmit={handleEmailLogin} className="space-y-4">
+        {/* Email/Password Signup */}
+        <form onSubmit={handleEmailSignup} className="space-y-4">
           <input
             type="email"
             placeholder="Email"
@@ -64,7 +64,7 @@ export default function Login() {
             type="submit"
             className="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"
           >
-            Login
+            Sign Up
           </button>
         </form>
 
@@ -75,19 +75,19 @@ export default function Login() {
           <hr className="flex-grow border-t" />
         </div>
 
-        {/* Google Login */}
+        {/* Google Signup */}
         <button
-          onClick={handleGoogleLogin}
+          onClick={handleGoogleSignup}
           className="w-full flex items-center justify-center border py-2 rounded-lg hover:bg-gray-100 transition"
         >
           <FcGoogle className="mr-2" size={22} /> Continue with Google
         </button>
 
-        {/* No account yet */}
+        {/* Already have account */}
         <p className="text-center text-gray-600 mt-4">
-          Don’t have an account?{" "}
-          <Link to="/signup" className="text-emerald-600 hover:underline">
-            Sign up
+          Already have an account?{" "}
+          <Link to="/login" className="text-emerald-600 hover:underline">
+            Login
           </Link>
         </p>
       </div>
